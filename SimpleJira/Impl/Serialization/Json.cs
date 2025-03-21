@@ -91,21 +91,15 @@ namespace SimpleJira.Impl.Serialization
             {
                 case JsonTokenType.Number:
                     if (reader.TryGetInt32(out int intValue))
-                    {
                         return intValue.ToString();
-                    }
                     if (reader.TryGetInt64(out long longValue))
-                    {
                         return longValue.ToString();
-                    }
                     if (reader.TryGetDouble(out double doubleValue))
-                    {
                         return doubleValue.ToString();
-                    }
                     if (reader.TryGetInt16(out short shortValue))
-                    {
                         return shortValue.ToString();
-                    }
+                    if (reader.TryGetDecimal(out decimal decimalValue))
+                        return decimalValue.ToString();
                     throw new JsonException("Unsupported number format.");
                 case JsonTokenType.String:
                     return reader.GetString();
